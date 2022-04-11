@@ -1,0 +1,81 @@
+import random
+
+letterlist = ["zero", "one", "two", "three", "four"]
+
+'''
+def checkLength(guessedword, trueword):
+    # while True:
+
+    if len(guessedword) == len(trueword):
+        print("okcool")
+        # break
+
+    elif len(guessedword) < len(trueword):
+        print("Your word is too short")
+
+    elif len(guessedword) > len(trueword):
+        print("Your word is too long")
+'''
+
+def checkword(guessedword, trueword):
+    empty = []
+
+    for i in range(0, len(trueword)):
+        if guessedword[i] in trueword and guessedword[i] == trueword[i]:
+            empty.append(guessedword[i])
+        elif guessedword[i] in trueword and guessedword.count(guessedword[i]) <= trueword.count(guessedword[i]):
+            '''
+            print(guessedword[i])
+            print(trueword)
+            print(guessedword.count(guessedword[i]))
+            print(trueword.count(guessedword[i]))
+            '''
+            empty.append("|")
+        else:
+            empty.append("_")
+
+    return empty
+
+
+# main method
+
+
+randomint = random.randint(0, len(letterlist) - 1)
+
+wordleword = letterlist[randomint]
+
+wordlelength = len(wordleword)
+
+while True:
+
+    wordguess = str(input(f"Please type your {wordlelength} letter guess:\n"))
+
+    alphabet = ['a', 'b', 'c', 'd', 'e',
+                'f', 'g', 'h', 'i', 'j',
+                'k', 'l', 'm', 'n', 'o',
+                'p', 'q', 'r', 's', 't',
+                'u', 'v', 'w', 'x', 'y',
+                'z']
+
+    #remainingletters = checkword(wordguess, wordleword)
+
+    if "|" in checkword(wordguess, wordleword) or "_" in checkword(wordguess, wordleword):
+
+        remainingletterslist= []
+
+        for j in wordguess:
+            for i in alphabet:
+                if j == i:
+                    alphabet.remove(j)
+
+                    remainingletterslist.append(alphabet)
+
+        #print(''.join(checkword(wordguess, wordleword)), f"remaining letters: {','.join(remainingletterslist)}")
+
+        print(''.join(checkword(wordguess, wordleword)), f"remaining letters: {remainingletterslist[len(remainingletterslist)-1]}")
+
+    else:
+        print("You got it!")
+        break
+
+
